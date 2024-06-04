@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Submitted Form Data</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name of the Hall</th>
+                <th>Faculty In-Charge</th>
+                <th>Department</th>
+                <th>Nature of Function</th>
+                <th>Phone Number</th>
+                <th>Date and Time of the Function</th>
+                <th>Date From</th>
+                <th>Date To</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Data will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch data from the server
+        fetch('/admin/data')
+            .then(response => response.json())
+            .then(data => {
+                // Iterate over the data and create table rows
+                const tableBody = document.getElementById('tableBody');
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${row.Name}</td>
+                        <td>${row.Faculty}</td>
+                        <td>${row.Department}</td>
+                        <td>${row.Nature}</td>
+                        <td>${row.Phone}</td>
+                        <td>${row.Datef}</td>
+                        <td>${row.Datefr}</td>
+                        <td>${row.Datet}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
